@@ -5,7 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "test": "ng test"
+    "test": "ng test",
+    "deploy": "ng build --base-href /RetireEZ/ && npx gh-pages -d dist/retire-ez"
   },
   "dependencies": {
     "@angular/animations": "^17.0.0",
@@ -25,6 +26,7 @@
     "@angular/cli": "^17.0.0",
     "@angular/compiler-cli": "^17.0.0",
     "@types/node": "^18.18.0",
+    "gh-pages": "^6.3.0",
     "typescript": "~5.2.0"
   }
 }

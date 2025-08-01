@@ -87,6 +87,23 @@ interface RetirementData {
     </div>
     
     <div class="card" style="margin-top: 20px;">
+      <h3 class="text-primary" style="margin-bottom: 16px;">📊 How You Compare to Peers</h3>
+      <div class="grid grid-2" style="margin-bottom: 30px;">
+        <div style="background: #f8f9fa; padding: 20px; border-radius: 12px;">
+          <h4 style="color: #667eea; margin-bottom: 12px;">💰 Your Progress</h4>
+          <div style="font-size: 1.8rem; font-weight: 700; color: #28a745;">{{ getPeerRank() }}</div>
+          <p style="color: #666; margin-top: 8px;">{{ getPeerMessage() }}</p>
+        </div>
+        <div style="background: #f8f9fa; padding: 20px; border-radius: 12px;">
+          <h4 style="color: #667eea; margin-bottom: 12px;">🎯 Peer Averages</h4>
+          <div style="margin-bottom: 8px;">Monthly Savings: <strong>${{ getPeerAverage('savings') }}</strong></div>
+          <div style="margin-bottom: 8px;">Total Saved: <strong>${{ getPeerAverage('total') }}</strong></div>
+          <div>Retirement Goal: <strong>${{ getPeerAverage('goal') }}</strong></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="card">
       <h3 class="text-primary" style="margin-bottom: 16px;">💡 Gen Z Money Tips</h3>
       <div class="grid grid-2">
         <div>
@@ -185,5 +202,55 @@ export class PlannerComponent {
     } else {
       return 'text-warning';
     }
+  }
+
+  getPeerRank(): string {
+    const score = this.calculatePeerScore();
+    if (score >= 80) return 'Top 20%';
+    if (score >= 60) return 'Top 40%';
+    if (score >= 40) return 'Average';
+    if (score >= 20) return 'Below Average';
+    return 'Getting Started';
+  }
+
+  getPeerMessage(): string {
+    const score = this.calculatePeerScore();
+    if (score >= 80) return 'You\'re crushing it! Keep up the great work.';
+    if (score >= 60) return 'Solid progress! You\'re ahead of most peers.';
+    if (score >= 40) return 'On track with your generation.';
+    if (score >= 20) return 'Room for improvement, but you\'re building habits!';
+    return 'Every journey starts with a first step!';
+  }
+
+  getPeerAverage(type: string): string {
+    const averages = {
+      savings: '350',
+      total: '8,500',
+      goal: '1.2M'
+    };
+    return averages[type as keyof typeof averages] || '0';
+  }
+
+  private calculatePeerScore(): number {
+    let score = 0;
+    
+    // Monthly contribution score (40 points max)
+    if (this.data.monthlyContribution >= 500) score += 40;
+    else if (this.data.monthlyContribution >= 300) score += 30;
+    else if (this.data.monthlyContribution >= 100) score += 20;
+    else if (this.data.monthlyContribution > 0) score += 10;
+    
+    // Current savings score (30 points max)
+    if (this.data.currentSavings >= 10000) score += 30;
+    else if (this.data.currentSavings >= 5000) score += 20;
+    else if (this.data.currentSavings >= 1000) score += 10;
+    else if (this.data.currentSavings > 0) score += 5;
+    
+    // Early start bonus (30 points max)
+    if (this.data.currentAge <= 22) score += 30;
+    else if (this.data.currentAge <= 25) score += 20;
+    else if (this.data.currentAge <= 30) score += 10;
+    
+    return Math.min(score, 100);
   }
 }
