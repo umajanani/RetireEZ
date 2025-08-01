@@ -15,7 +15,7 @@
           "options": {
             "outputPath": "dist/retire-ez",
             "index": "src/index.html",
-            "baseHref": "/RetireEZ/",
+            "baseHref": "/",
             "main": "src/main.ts",
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",

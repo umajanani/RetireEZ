@@ -96,9 +96,9 @@ interface RetirementData {
         </div>
         <div style="background: #f8f9fa; padding: 20px; border-radius: 12px;">
           <h4 style="color: #667eea; margin-bottom: 12px;">🎯 Peer Averages</h4>
-          <div style="margin-bottom: 8px;">Monthly Savings: <strong>${{ getPeerAverage('savings') }}</strong></div>
-          <div style="margin-bottom: 8px;">Total Saved: <strong>${{ getPeerAverage('total') }}</strong></div>
-          <div>Retirement Goal: <strong>${{ getPeerAverage('goal') }}</strong></div>
+          <div style="margin-bottom: 8px;">Monthly Savings: <strong>{{ getPeerAverage('savings') }}</strong></div>
+          <div style="margin-bottom: 8px;">Total Saved: <strong>{{ getPeerAverage('total') }}</strong></div>
+          <div>Retirement Goal: <strong>{{ getPeerAverage('goal') }}</strong></div>
         </div>
       </div>
     </div>
