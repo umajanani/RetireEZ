@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
-    "deploy": "ng build --base-href / && npx gh-pages -d dist/retire-ez --cname RetireEZ.github.io"
+    "deploy": "ng build --base-href / && npx gh-pages -d dist/retire-ez --cname RetireEZ.github.io",
+    "vercel-build": "ng build"
   },
   "dependencies": {
     "@angular/animations": "^17.0.0",
